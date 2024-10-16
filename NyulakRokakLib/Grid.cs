@@ -23,7 +23,7 @@ namespace NyulakRokakLib
             field = new Tile[height, width];
             BuildGrid();
         }
-        // Létrehozzá pályát
+        // Létrehozza a pályát
         private void BuildGrid()
         {
             for (int i = 0; i < height; i++)
@@ -46,7 +46,7 @@ namespace NyulakRokakLib
                 {
                     field[x, y].ContainsFox = true;
                 }
-                else
+                else 
                 {
                     i--;
                 }
@@ -55,7 +55,7 @@ namespace NyulakRokakLib
             {
                 int x = r.Next(Width);
                 int y = r.Next(Height);
-                if (!field[x, y].ContainsRabbit)
+                if (!field[x, y].ContainsRabbit && !field[x, y].ContainsFox)
                 {
                     field[x, y].ContainsRabbit = true;
                 }
@@ -65,7 +65,33 @@ namespace NyulakRokakLib
                 }
             }
         }
-        
-
+        // Vissza adja egy adott mezejét a mátrixnak
+        public string GetTile(int x, int y)
+        {
+            if (field[x, y].ContainsRabbit)
+            {
+                return ""; // Ide jön a nyúl ikonja
+            }
+            else if (field[x, y].ContainsFox)
+            {
+                return ""; // Ide jön a róka ikonja
+            }
+            else if (field[x, y].GrassState == "seedling")
+            {
+                return ""; // Ide jön a fű kezdetleges ikonja
+            }
+            else if (field[x, y].GrassState == "young")
+            {
+                return ""; // Ide jön a fű második ikonja
+            }
+            else if (field[x, y].GrassState == "mature")
+            {
+                return ""; // Ide jön a megnőtt fű ikonja
+            }
+            else
+            {
+                return ""; // Üres mező ikonja, ha lesz
+            }
+        }
     }
 }
