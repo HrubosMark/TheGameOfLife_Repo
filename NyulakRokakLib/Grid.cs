@@ -19,7 +19,7 @@ namespace NyulakRokakLib
         public Grid() 
         {
             height = 10;
-            width = 20;
+            width = 10;
             field = new Tile[height, width];
             BuildGrid();
         }
@@ -35,13 +35,13 @@ namespace NyulakRokakLib
             }
         }
         // Feltölti a pályát állatokkal
-        public void AddAnimals(int foxNum, int rabbitNum)
+        public void FillUp(int foxNum, int rabbitNum)
         {
             Random r = new Random();
             for (int i = 0; i < foxNum; i++)
             {
-                int x = r.Next(Height);
-                int y = r.Next(Width);
+                int x = r.Next(Width);
+                int y = r.Next(Height);
                 if (!field[x, y].ContainsFox)
                 {
                     field[x, y].ContainsFox = true;
@@ -53,8 +53,8 @@ namespace NyulakRokakLib
             }
             for (int i = 0; i < rabbitNum; i++)
             {
-                int x = r.Next(Height);
-                int y = r.Next(Width);
+                int x = r.Next(Width);
+                int y = r.Next(Height);
                 if (!field[x, y].ContainsRabbit && !field[x, y].ContainsFox)
                 {
                     field[x, y].ContainsRabbit = true;
@@ -70,27 +70,27 @@ namespace NyulakRokakLib
         {
             if (field[x, y].ContainsRabbit)
             {
-                return "R"; // Ide jön a nyúl ikonja
+                return ""; // Ide jön a nyúl ikonja
             }
             else if (field[x, y].ContainsFox)
             {
-                return "F"; // Ide jön a róka ikonja
+                return ""; // Ide jön a róka ikonja
             }
             else if (field[x, y].GrassState == "seedling")
             {
-                return "S"; // Ide jön a fű kezdetleges ikonja
+                return ""; // Ide jön a fű kezdetleges ikonja
             }
             else if (field[x, y].GrassState == "young")
             {
-                return "Y"; // Ide jön a fű második ikonja
+                return ""; // Ide jön a fű második ikonja
             }
             else if (field[x, y].GrassState == "mature")
             {
-                return "M"; // Ide jön a megnőtt fű ikonja
+                return ""; // Ide jön a megnőtt fű ikonja
             }
             else
             {
-                return " "; // Üres mező ikonja, ha lesz
+                return ""; // Üres mező ikonja, ha lesz
             }
         }
     }
