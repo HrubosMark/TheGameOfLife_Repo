@@ -70,27 +70,27 @@ namespace NyulakRokakLib
         {
             if (field[x, y].ContainsRabbit)
             {
-                return "R"; // Ide jön a nyúl ikonja
+                return "🐰"; // Ide jön a nyúl ikonja
             }
             else if (field[x, y].ContainsFox)
             {
-                return "F"; // Ide jön a róka ikonja
+                return "🦊"; // Ide jön a róka ikonja
             }
             else if (field[x, y].GrassState == "seedling")
             {
-                return "S"; // Ide jön a fű kezdetleges ikonja
+                return "🌱"; // Ide jön a fű kezdetleges ikonja
             }
             else if (field[x, y].GrassState == "young")
             {
-                return "Y"; // Ide jön a fű második ikonja
+                return "🍃"; // Ide jön a fű második ikonja
             }
             else if (field[x, y].GrassState == "mature")
             {
-                return "M"; // Ide jön a megnőtt fű ikonja
+                return "🌿"; // Ide jön a megnőtt fű ikonja
             }
             else
             {
-                return " "; // Üres mező ikonja, ha lesz
+                return "⚪"; // Üres mező ikonja, ha lesz
             }
         }
     }

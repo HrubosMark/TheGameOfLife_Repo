@@ -1,5 +1,5 @@
-﻿// Mikuska Péter Marcell 12.a
-// 2024.10.16
+﻿// Mikuska Péter Marcell 12.a, Hrubos Márk 12.a
+
 
 using NyulakRokakLib;
 
@@ -17,3 +17,8 @@ for (int i = 0; i < field.Height; i++)
     }
     Console.WriteLine("");
 }
+
+//A Felhasználotól bekért körök száma
+
+Console.WriteLine("Adja meg hány körös legyen a szimuláció: ");
+string rounds  = Console.ReadLine();
