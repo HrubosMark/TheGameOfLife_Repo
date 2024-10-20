@@ -118,6 +118,7 @@ namespace NyulakRokakLib
         {
             for (int i = 0; i < rounds; i++) 
             {
+                WriteMatrix();
                 for (int j = 0; j < Height; j++)
                 {
                     for (int k = 0; k < Width; k++)
@@ -125,8 +126,6 @@ namespace NyulakRokakLib
                         field[j, k].Grow();
                     }
                 }
-                
-                WriteMatrix();
                 Thread.Sleep(timeBetweenRounds);
                 Console.Clear();
             }
