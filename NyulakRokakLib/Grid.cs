@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,7 +14,10 @@ namespace NyulakRokakLib
 
         public int Height { get => height; init => height = value; }
         public int Width { get => width; init => width = value; }
+        private List<int[]> FoxLocations { get; set; } // 2 értékű tömb, 1. x koordináta, 2. y koordináta
+        private List<int[]> RabbitLocations { get; set; }
 
+        // A fő mátrix
         public Tile[,] field { get; init; }
         
         public Grid() 
@@ -40,11 +44,13 @@ namespace NyulakRokakLib
             Random r = new Random();
             for (int i = 0; i < foxNum; i++)
             {
+                FoxLocations = new List<int[]>();
                 int x = r.Next(Height);
                 int y = r.Next(Width);
                 if (!field[x, y].ContainsFox)
                 {
                     field[x, y].ContainsFox = true;
+                    FoxLocations.Add(new int[] { x, y });
                 }
                 else 
                 {
@@ -53,11 +59,13 @@ namespace NyulakRokakLib
             }
             for (int i = 0; i < rabbitNum; i++)
             {
+                RabbitLocations = new List<int[]>();
                 int x = r.Next(Height);
                 int y = r.Next(Width);
                 if (!field[x, y].ContainsRabbit && !field[x, y].ContainsFox)
                 {
                     field[x, y].ContainsRabbit = true;
+                    RabbitLocations.Add(new int[] { x, y });
                 }
                 else
                 {
@@ -65,32 +73,62 @@ namespace NyulakRokakLib
                 }
             }
         }
+        // Megjeleníti a mátrixot
+        public void WriteMatrix()
+        {
+            for(int i = 0; i < Height; i++)
+            {
+                for (int j = 0; j < Width; j++)
+                {
+                    Console.Write($"{GetTile(i, j)} ");
+                }
+                Console.WriteLine("");
+            }
+        }
         // Vissza adja egy adott mezejét a mátrixnak
         public string GetTile(int x, int y)
         {
             if (field[x, y].ContainsRabbit)
             {
-                return "🐰"; // Ide jön a nyúl ikonja
+                return "R"; // Ide jön a nyúl ikonja 🐰
             }
             else if (field[x, y].ContainsFox)
             {
-                return "🦊"; // Ide jön a róka ikonja
+                return "F"; // Ide jön a róka ikonja 🦊
             }
             else if (field[x, y].GrassState == "seedling")
             {
-                return "🌱"; // Ide jön a fű kezdetleges ikonja
+                return "S"; // Ide jön a fű kezdetleges ikonja 🌱
             }
             else if (field[x, y].GrassState == "young")
             {
-                return "🍃"; // Ide jön a fű második ikonja
+                return "Y"; // Ide jön a fű második ikonja 🍃
             }
             else if (field[x, y].GrassState == "mature")
             {
-                return "🌿"; // Ide jön a megnőtt fű ikonja
+                return "M"; // Ide jön a megnőtt fű ikonja 🌿
             }
             else
             {
-                return "⚪"; // Üres mező ikonja, ha lesz
+                return "N"; // Üres mező ikonja, ha lesz ⚪
+            }
+        }
+        // Körök rendszere
+        public void Run(int timeBetweenRounds, int rounds)
+        {
+            for (int i = 0; i < rounds; i++) 
+            {
+                for (int j = 0; j < Height; j++)
+                {
+                    for (int k = 0; k < Width; k++)
+                    {
+                        field[j, k].Grow();
+                    }
+                }
+                
+                WriteMatrix();
+                Thread.Sleep(timeBetweenRounds);
+                Console.Clear();
             }
         }
     }
