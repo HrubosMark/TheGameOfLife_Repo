@@ -13,6 +13,21 @@ Console.WriteLine("Adja meg hány körös legyen a szimuláció: ");
 string input = Console.ReadLine();
 int rounds;
 
+//A Felhasználotól bekért mátrix szélessége és magassága
+
+Console.WriteLine("Adja meg ,hogy mekkora legyen a szimuláció mátrix magassága: ");
+int height = int.Parse(Console.ReadLine());
+Console.WriteLine("Adja meg ,hogy mekkora legyen a szimuláció mátrix szélessége: ");
+int width = int.Parse(Console.ReadLine());
+
+//A Felhasználotól bekért nyulak száma
+Console.WriteLine("Adja meg hány darab nyulall kezdődjön a szimuláció: ");
+int rabbits = int.Parse(Console.ReadLine());
+
+//A Felhasználotól bekért rókák száma
+Console.WriteLine("Adja meg hány darab rókával kezdődjön a szimuláció: ");
+int foxes = int.Parse(Console.ReadLine());
+
 while (!int.TryParse(input, out rounds))
 {
     Console.WriteLine("Számot adjon meg!");
