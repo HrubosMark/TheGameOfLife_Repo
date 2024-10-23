@@ -14,8 +14,8 @@ namespace NyulakRokakLib
 
         public int Height { get => height; init => height = value; }
         public int Width { get => width; init => width = value; }
-        private List<int[]> FoxLocations { get; set; } // 2 értékű tömb, 1. x koordináta, 2. y koordináta
-        private List<int[]> RabbitLocations { get; set; }
+        private List<Fox> Foxs { get; set; }
+        private List<Rabbit> Rabbits { get; set; }
 
         // A fő mátrix
         public Tile[,] field { get; init; }
@@ -44,28 +44,26 @@ namespace NyulakRokakLib
             Random r = new Random();
             for (int i = 0; i < foxNum; i++)
             {
-                FoxLocations = new List<int[]>();
                 int x = r.Next(Height);
                 int y = r.Next(Width);
                 if (!field[x, y].ContainsFox)
                 {
                     field[x, y].ContainsFox = true;
-                    FoxLocations.Add(new int[] { x, y });
+                    Foxs.Add(new Fox(x, y));
                 }
-                else 
+                else
                 {
                     i--;
                 }
             }
             for (int i = 0; i < rabbitNum; i++)
             {
-                RabbitLocations = new List<int[]>();
                 int x = r.Next(Height);
                 int y = r.Next(Width);
                 if (!field[x, y].ContainsRabbit && !field[x, y].ContainsFox)
                 {
                     field[x, y].ContainsRabbit = true;
-                    RabbitLocations.Add(new int[] { x, y });
+                    Rabbits.Add(new Rabbit(x, y));
                 }
                 else
                 {
@@ -73,6 +71,7 @@ namespace NyulakRokakLib
                 }
             }
         }
+    }
         // Megjeleníti a mátrixot
         public void WriteMatrix()
         {
