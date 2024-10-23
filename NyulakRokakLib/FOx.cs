@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NyulakRokakLib
 {
-    public class Rabbit
+    public class Fox
     {
         public int MaxFullnes { get; init; }
         public int Fullness { get; set; }
@@ -14,7 +14,7 @@ namespace NyulakRokakLib
         public int CoordX { get; set; }
         public int CoordY { get; set; }
 
-        public Rabbit(int maxFullnes, int fullness, int reprodoction, int x, int y)
+        public Fox(int maxFullnes, int fullness, int reprodoction, int x, int y)
         {
             MaxFullnes = maxFullnes;
             Fullness = fullness;
@@ -22,7 +22,7 @@ namespace NyulakRokakLib
             CoordX = x;
             CoordY = y;
         }
-        public Rabbit(int x, int y)
+        public Fox(int x, int y)
         {
             MaxFullnes = 5;
             Fullness = 0;

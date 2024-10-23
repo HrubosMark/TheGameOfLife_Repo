@@ -20,8 +20,8 @@ namespace NyulakRokakLib
 
         // A fő mátrix
         public Tile[,] field { get; init; }
-        
-        public Grid(int height, int width) 
+
+        public Grid(int height, int width)
         {
             this.height = height;
             this.width = width;
@@ -53,7 +53,7 @@ namespace NyulakRokakLib
                     field[x, y].ContainsFox = true;
                     Foxes.Add(new Fox(x, y));
                 }
-                else 
+                else
                 {
                     i--;
                 }
@@ -74,10 +74,11 @@ namespace NyulakRokakLib
                 }
             }
         }
+
         // Megjeleníti a mátrixot
         public void WriteMatrix()
         {
-            for(int i = 0; i < Height; i++)
+            for (int i = 0; i < Height; i++)
             {
                 for (int j = 0; j < Width; j++)
                 {
