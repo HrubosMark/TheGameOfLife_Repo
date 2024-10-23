@@ -6,28 +6,62 @@ namespace NyulakRokak_Test
     [TestClass]
     public class NyulakRokak_Test
     {
-        private Grid grid;
+        [TestMethod]
+        public void Test_Tile_Grow_ChangeGrassState()
+        {
+            Tile tile = new Tile();
+
+            tile.Grow(); // elsõ növekedés
+            string afterFirstGrow = tile.GrassState;
+
+            tile.Grow(); // második növekedés
+            string afterSecondGrow = tile.GrassState;
+
+            // Assert
+            Assert.AreEqual("young", afterFirstGrow);
+            Assert.AreEqual("mature", afterSecondGrow);
+        }
 
         [TestMethod]
-        public void Initialize()
+        public void Test_Grid_InitializeCorrectly()
         {
-            // Nyulak tulajdonságai
-            AnimalProperties rabbitProperties = new AnimalProperties
-            {
-                MaxFullness = 5,
-                ReproductionFullness = 3,
-                HungerRate = 1,
-                FoodValue = 1
-            };
+            int expectedHeight = 5;
+            int expectedWidth = 5;
 
-            // Rókák tulajdonságai
-            AnimalProperties foxProperties = new AnimalProperties
-            {
-                MaxFullness = 10,
-                ReproductionFullness = 9,
-                HungerRate = 2,
-                FoodValue = 3
-            };
+            Grid grid = new Grid(expectedHeight, expectedWidth);
+
+            Assert.AreEqual(expectedHeight, grid.Height);
+            Assert.AreEqual(expectedWidth, grid.Width);
+        }
+
+        [TestMethod]
+        public void Test_FoxDefaultConstructor_InitializeCorrectly()
+        {
+            Fox fox = new Fox(1, 1);
+
+            Assert.AreEqual(5, fox.MaxFullnes); // Alapértelmezett MaxFullnes érték
+            Assert.AreEqual(0, fox.Fullness);   // Alapértelmezett Fullness érték
+            Assert.AreEqual(3, fox.Reprodoction); // Alapértelmezett Reprodoction érték
+        }
+
+        [TestMethod]
+        public void Test_RabbitDefaultConstructor_ShouldInitializeCorrectly()
+        {
+            Rabbit rabbit = new Rabbit(1, 1);
+
+            Assert.AreEqual(5, rabbit.MaxFullnes);  // Alapértelmezett MaxFullnes érték
+            Assert.AreEqual(0, rabbit.Fullness);    // Alapértelmezett Fullness érték
+            Assert.AreEqual(3, rabbit.Reprodoction); // Alapértelmezett Reprodoction érték
+        }
+
+        [TestMethod]
+        public void Test_TileDefaultConstructor_InitializeCorrectly()
+        {
+            Tile tile = new Tile();
+
+            Assert.AreEqual("seedling", tile.GrassState);  // Alapértelmezett fû állapota
+            Assert.IsFalse(tile.ContainsRabbit);
+            Assert.IsFalse(tile.ContainsFox); 
         }
     }
 }
