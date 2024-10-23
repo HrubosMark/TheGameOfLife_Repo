@@ -3,39 +3,67 @@
 
 using NyulakRokakLib;
 
-Grid field = new Grid();
-
-field.AddAnimals(2, 3);
 
 //A Felhasználotól bekért körök száma
 
-Console.WriteLine("Adja meg hány körös legyen a szimuláció: ");
+Console.Write("Adja meg hány körös legyen a szimuláció: ");
 string input = Console.ReadLine();
 int rounds;
-
-//A Felhasználotól bekért mátrix szélessége és magassága
-
-Console.WriteLine("Adja meg ,hogy mekkora legyen a szimuláció mátrix magassága: ");
-int height = int.Parse(Console.ReadLine());
-Console.WriteLine("Adja meg ,hogy mekkora legyen a szimuláció mátrix szélessége: ");
-int width = int.Parse(Console.ReadLine());
-
-//A Felhasználotól bekért nyulak száma
-Console.WriteLine("Adja meg hány darab nyulall kezdődjön a szimuláció: ");
-int rabbits = int.Parse(Console.ReadLine());
-
-//A Felhasználotól bekért rókák száma
-Console.WriteLine("Adja meg hány darab rókával kezdődjön a szimuláció: ");
-int foxes = int.Parse(Console.ReadLine());
-
 while (!int.TryParse(input, out rounds))
 {
-    Console.WriteLine("Számot adjon meg!");
+    Console.Write("Számot adjon meg!");
     input = Console.ReadLine();
 }
 
+//A Felhasználotól bekért mátrix szélessége és magassága
+
+Console.Write("Adja meg, hogy mekkora legyen a pálya magassága: ");
+string input1 = Console.ReadLine();
+int height;
+while (!int.TryParse(input1, out height))
+{
+    Console.Write("Számot adjon meg!");
+    input1 = Console.ReadLine();
+}
+
+Console.Write("Adja meg, hogy mekkora legyen a pálya szélessége: ");
+string input2 = Console.ReadLine();
+int width;
+while (!int.TryParse(input2, out width))
+{
+    Console.WriteLine("Számot adjon meg!");
+    input2 = Console.ReadLine();
+}
+
+//A Felhasználotól bekért nyulak száma
+Console.Write("Adja meg hány darab nyulall kezdődjön a szimuláció: ");
+string input3 = Console.ReadLine();
+int rabbits;
+
+while (!int.TryParse(input3, out rabbits))
+{
+    Console.Write("Számot adjon meg!");
+    input3 = Console.ReadLine();
+}
+
+//A Felhasználotól bekért rókák száma
+Console.Write("Adja meg hány darab rókával kezdődjön a szimuláció: ");
+string input4 = Console.ReadLine();
+int foxes;
+
+while (!int.TryParse(input4, out foxes))
+{
+    Console.Write("Számot adjon meg!");
+    input4 = Console.ReadLine();
+}
+
+Grid field = new Grid(height, width);
+
+field.AddAnimals(foxes, rabbits);
+
 
 //A körök közti idő ms-ben
-int betweenRounds = 5000;
+Console.Write("Adja meg hány másodperces legyen egy kör: ");
+int betweenRounds = int.Parse(Console.ReadLine())*1000;
 field.Run(betweenRounds, rounds);
 

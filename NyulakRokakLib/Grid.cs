@@ -20,10 +20,10 @@ namespace NyulakRokakLib
         // A fő mátrix
         public Tile[,] field { get; init; }
         
-        public Grid() 
+        public Grid(int height, int width) 
         {
-            height = 10;
-            width = 20;
+            this.height = height;
+            this.width = width;
             field = new Tile[height, width];
             BuildGrid();
         }
